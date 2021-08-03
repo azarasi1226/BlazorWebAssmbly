@@ -6,11 +6,22 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<p>現在時刻: @now</p>
+<button class="btn btn-primary" @onclick="DispNowDate">時刻を更新</button>
+
 @code {
     private int currentCount = 0;
 
     private void IncrementCount()
     {
         currentCount++;
+    }
+
+    //現在時刻を表示
+    private DateTime now = DateTime.Now;
+
+    private void DispNowDate()
+    {
+        now = DateTime.Now;
     }
 }
