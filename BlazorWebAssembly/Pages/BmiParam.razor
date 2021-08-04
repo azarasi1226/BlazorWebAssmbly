@@ -1,0 +1,60 @@
+﻿@page "/param"
+@page "/param/{Height}/{Weight}"
+
+@using BlazorWebAssembly.Pages.Bmi
+
+<h3>パラメーターを使った例</h3>
+
+<table class="table">
+    <tr>
+        <td>名前</td>
+        <td>@_bmi.Name</td>
+    </tr>
+    <tr>
+        <td>身長</td>
+        <td>@_bmi.Height</td>
+    </tr>
+    <tr>
+        <td>体重</td>
+        <td>@_bmi.Weight</td>
+    </tr>
+</table>
+
+<div style="font-size: @_fontSize">
+    計算結果は @_bmi.Bmi です。
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string Height { get; set; }
+    [Parameter]
+    public string Weight { get; set; }
+    private BmiItem _bmi;
+    private string _fontSize = "32px";
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrEmpty(Height))
+        {
+            _bmi = new BmiItem()
+            {
+                Name = "安藤和樹",
+                Height = double.Parse(Height),
+                Weight = double.Parse(Weight)
+            };
+        }
+        else
+        {
+            _bmi = new BmiItem()
+            {
+                Name = "パラメーターを指定してください",
+                Height = 0.0,
+                Weight = 0.0
+            };
+        }
+    }
+
+
+}
